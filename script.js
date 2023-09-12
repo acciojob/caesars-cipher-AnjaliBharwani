@@ -32,19 +32,42 @@ const lookup = {
   ",": ",",
 };
 
+// function rot13(encodedStr) {
+//   let decodedArr = []; // Your Result goes here
+//   // Only change code below this line
+// 	for (let i = 0; i < encodedStr.length; i++) {
+//     const char = encodedStr[i];
+//     if (lookup.hasOwnProperty(char)) {
+//       decodedArr.push(lookup[char]);
+//     } else {
+//       decodedArr.push(char);
+//     }
+//   }
+
+//   return decodedArr.join("");
+
 function rot13(encodedStr) {
-  let decodedArr = []; // Your Result goes here
-  // Only change code below this line
-	for (let i = 0; i < encodedStr.length; i++) {
+  let decodedArr = [];
+
+  for (let i = 0; i < encodedStr.length; i++) {
     const char = encodedStr[i];
-    if (lookup.hasOwnProperty(char)) {
-      decodedArr.push(lookup[char]);
-    } else {
+
+    if (/[A-Z]/.test(char)) {
+      const charCode = char.charCodeAt(0);
+
+      if (charCode >= 65 && charCode <= 77) {
+        decodedArr.push(String.fromCharCode(charCode + 13));
+      } 
+     else{ 
+decodedArr.push(String.fromCharCode(charCode - 13));
+      }
+    } 
+    else {
       decodedArr.push(char);
     }
   }
-
-  return decodedArr.join("");
+  return decodedArr.join('');
+}
 
 
   // return; //return decodedArr
